@@ -1,10 +1,10 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const secretKey = 'your-secret-key';
-
+const secretKey = process.env.SECRETKEY
 app.use(express.json());
 
 function authorizeToken(req, res, next) {
@@ -23,9 +23,9 @@ function authorizeToken(req, res, next) {
 }
 
 app.post('/login', (req, res) => {
-    const { username, password } = req.body;
+    const { username } = req.body;
 
-    if (username === 'user' && password === 'password') {
+    if (username === process.env.USER) {
         const token = jwt.sign({ username }, secretKey);
         res.json({ token });
     } else {

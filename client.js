@@ -3,8 +3,7 @@ const axios = require('axios');
 const serverUrl = 'http://localhost:4000';
 
 const loginData = {
-    username: 'user',
-    password: 'password',
+    username: 'kevin',
 };
 
 axios.post(`${serverUrl}/login`, loginData)
