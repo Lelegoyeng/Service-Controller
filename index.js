@@ -7,8 +7,11 @@ const PORT = process.env.PORT || 4000;
 const secretKey = process.env.SECRETKEY
 app.use(express.json());
 
+const Service = require('./service')
+
 function authorizeToken(req, res, next) {
     const token = req.headers.authorization.split(' ')[1];
+    console.log(token)
     if (!token) {
         return res.status(403).json({ message: 'Tidak ada token tersedia' });
     }
@@ -33,8 +36,10 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.get('/protected', authorizeToken, (req, res) => {
-    res.json({ message: 'Anda memiliki akses ke halaman yang dilindungi' });
+app.get('/account', authorizeToken, async (req, res) => {
+    const AccountInformation = await Service.Account();
+    console.log(AccountInformation)
+    res.json({ message: AccountInformation });
 });
 
 app.listen(PORT, () => {
