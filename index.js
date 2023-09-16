@@ -42,6 +42,18 @@ app.get('/account', authorizeToken, async (req, res) => {
     res.json({ message: AccountInformation });
 });
 
+app.get('/position', authorizeToken, async (req, res) => {
+    const Position = await Service.Position();
+    console.log(Position)
+    res.json({ message: Position });
+});
+
+app.get('/history', authorizeToken, async (req, res) => {
+    const History = await Service.History();
+    console.log(History)
+    res.json({ message: History });
+});
+
 app.listen(PORT, () => {
     console.log(`Server berjalan di port ${PORT}`);
 });
