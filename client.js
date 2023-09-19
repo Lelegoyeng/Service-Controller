@@ -15,7 +15,7 @@ axios.post(`${serverUrl}/login`, loginData)
             },
         };
 
-        axios.get(`${serverUrl}/protected`, config)
+        axios.get(`${serverUrl}/account`, config)
             .then(protectedResponse => {
                 console.log(protectedResponse.data);
             })
